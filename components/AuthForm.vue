@@ -2,68 +2,29 @@
   <div class="container-fluid main-container">
     <div class="title-zone">
       <h2 class="titre">
-        ARCHIDIOCESE D'ABIDJAN <br>
-        DOYENNE MONSEIGNEUR BLAISE ANOH <br>
-        PAROISSE NOTRE DAME DE LA NATIVITE
+        ARCHIDIOCESE D'ABIDJAN <br> DOYENNE MONSEIGNEUR BLAISE ANOH <br> PAROISSE NOTRE DAME DE LA NATIVITE
       </h2>
     </div>
-    <div class="social-icons">
-      <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">
-        <img src="/facebook-icon.png" alt="Facebook">
-      </a>
-      <a href="https://www.twitter.com" target="_blank" class="social-icon twitter">
-        <img src="/twitter-icon.png" alt="Twitter">
-      </a>
-    </div>
-    <div
-      class="form-zone"
-      style="border: 3px solid #e7340c;border-right: none;"
-    >
-      <div
-        class="big-circle"
-      >
+    <div class="form-zone">
+      <div class="big-circle">
         <img src="/icon.png" alt="Logo" class="circle-image">
       </div>
       <div class="form-container">
         <h2 class="form-title">
-          Inscription
+          Authentification
         </h2>
         <form class="scrollable-form" @submit.prevent="submitForm">
           <div class="form-group">
-            <input v-model="formData.nom" type="text" placeholder="Nom" required class="input-field">
-          </div>
-          <div class="form-group">
-            <input v-model="formData.prenoms" type="text" placeholder="Prénoms" required class="input-field">
-          </div>
-          <div class="form-group">
-            <p class="section-title">
-              Tranche d'âge
-            </p>
-            <div class="radio-group">
-              <div v-for="(age, index) in tranchesAge" :key="index" class="radio-item">
-                <input :id="`age-${index}`" v-model="formData.age" type="radio" :value="age" required>
-                <label :for="`age-${index}`">{{ age }}</label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <input v-model="formData.profession" type="text" placeholder="Profession" required class="input-field">
-          </div>
-          <div class="form-group">
-            <input v-model="formData.quartier" type="text" placeholder="Quartier" required class="input-field">
-          </div>
-          <div class="form-group">
-            <input v-model="formData.contacts" type="tel" placeholder="Contacts" required class="input-field">
-          </div>
-          <div class="form-group">
             <input v-model="formData.email" type="email" placeholder="Email" required class="input-field">
           </div>
-          <div class="checkbox">
-            <input id="terms" type="checkbox" required>
-            <label for="terms">J'accepte que mes données soient collectées et utilisées dans le cadre de cette activité</label>
+          <div class="form-group">
+            <input v-model="formData.password" type="password" placeholder="Mot de passe" required class="input-field">
           </div>
-          <button class="register-button">
-            S'inscrire
+          <div v-if="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
+          <button type="submit" class="register-button">
+            Se connecter
           </button>
         </form>
       </div>
@@ -78,47 +39,59 @@ export default {
   data () {
     return {
       formData: {
-        nom: '',
-        prenoms: '',
-        age: '',
-        profession: '',
-        quartier: '',
-        contacts: '',
-        email: ''
+        email: '',
+        password: ''
       },
-      tranchesAge: ['18-25', '26-35', '36-45', '46-55', '56+']
+      errorMessage: ''
     }
   },
   methods: {
     async submitForm () {
+      try {
+        // Authentification via Supabase
+        const { user, error } = await supabase.auth.signInWithPassword({
+          email: this.formData.email,
+          password: this.formData.password
+        })
+
+        if (error) {
+          this.errorMessage = error.message
+        } else {
+          this.errorMessage = ''
+          // Vérification du rôle de l'utilisateur dans la table "administrateurs"
+          await this.checkAdminRole(user)
+        }
+      } catch (err) {
+        this.errorMessage = 'Erreur lors de la connexion'
+        // eslint-disable-next-line no-console
+        console.error('Erreur lors de la connexion:', err.message)
+      }
+    },
+
+    async checkAdminRole (user) {
       const { data, error } = await supabase
-        .from('adhesions')
-        .insert([
-          {
-            nom: this.formData.nom,
-            prenoms: this.formData.prenoms,
-            age: this.formData.age,
-            profession: this.formData.profession,
-            quartier: this.formData.quartier,
-            contacts: this.formData.contacts,
-            email: this.formData.email
-          }
-        ])
+        .from('administrateurs')
+        .select('role')
+        .eq('email', user.email) // Utiliser l'email pour rechercher le rôle
+        .single()
 
       if (error) {
         // eslint-disable-next-line no-console
-        console.error('Erreur lors de la soumission:', error.message)
-        alert('Erreur lors de la soumission')
+        console.error('Erreur lors de la vérification du rôle', error)
+        this.errorMessage = 'Erreur de vérification du rôle'
+      } else if (data.role === 'admin') {
+        this.$router.push('/dashboard') // Redirection vers le tableau de bord
       } else {
-        // eslint-disable-next-line no-console
-        console.log('Données soumises avec succès:', data)
-        alert('Formulaire soumis avec succès !')
+        this.errorMessage = 'Accès refusé. Vous devez être administrateur.'
       }
     }
   }
 }
-
 </script>
+
+<style scoped>
+/* Styles de la page de connexion */
+</style>
 
   <style scoped>
   /* Container principal */
@@ -232,6 +205,7 @@ export default {
     text-align: center;
     color: #e7340c;
     font-size: 1.2rem;
+    margin-bottom: 70px;
   }
 
   /* Champs de saisie */
@@ -244,21 +218,7 @@ export default {
     outline: none;
   }
 
-  /* Tranche d'âge */
-  .radio-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .radio-item {
-    display: flex;
-    align-items: center;
-  }
-  .radio-item input {
-    margin-right: 0.5rem;
-  }
-
-  /* Bouton d'inscription */
+  /* Bouton de soumission */
   .register-button {
     width: 100%;
     background-color: #e7340c;
@@ -271,6 +231,14 @@ export default {
   }
   .register-button:hover {
     background-color: darkblue;
+  }
+
+  /* Message d'erreur */
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 0.8rem;
+    margin-top: 10px;
   }
 
   /* Checkbox */

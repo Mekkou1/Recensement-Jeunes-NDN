@@ -49,12 +49,28 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    workbox: {
+      runtimeCaching: [
+        {
+          urlPattern: '/*',
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'pages-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 30 // Garder les fichiers en cache pendant 30 jours
+            }
+          }
+        }
+      ]
+    },
+
     manifest: {
       lang: 'fr',
       name: 'Adhésion NDN',
       short_name: 'NDN',
       description: 'Formulaire d\'adhésion NDN',
-      theme_color: '#007bff',
+      theme_color: 'rgb(21, 21, 98)',
       background_color: '#ffffff',
       display: 'standalone',
       icons: [
@@ -66,6 +82,31 @@ export default {
         {
           src: '/icon-512x512.png',
           sizes: '512x512',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-384x384.png',
+          sizes: '384x384',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-152x152.png',
+          sizes: '152x152',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-144x144.png',
+          sizes: '144x144',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-120x120.png',
+          sizes: '120x120',
+          type: 'image/png'
+        },
+        {
+          src: '/icon-64x64.png',
+          sizes: '64x64',
           type: 'image/png'
         }
       ]
