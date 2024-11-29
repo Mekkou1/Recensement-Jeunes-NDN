@@ -4,7 +4,9 @@
       <div class="title-circle">
         <h2 class="titre">
           ARCHIDIOCESE D'ABIDJAN <br>
+          <div class="underline" />
           DOYENNE MONSEIGNEUR BLAISE ANOH <br>
+          <div class="underline" />
           PAROISSE NOTRE DAME DE LA NATIVITE
         </h2>
       </div>
@@ -13,7 +15,7 @@
       <div class="big-circle">
         <img src="/icon.png" alt="Logo" class="circle-image">
       </div>
-      <div class="form-container">
+      <div class="form-container" style="text-align: center;">
         <h2 class="form-title">
           Inscription
         </h2>
@@ -164,7 +166,7 @@ export default {
 }
 
   .titre {
-    font-size: 12px;
+    font-size: 14px ;
     color: rgb(12, 12, 12);
     padding: 2px;
   }
@@ -221,6 +223,9 @@ export default {
     text-align: center;
     color: #e7340c;
     font-size: 1.2rem;
+    text-align: center;
+    position: relative;
+    display: inline-block;
   }
 
   /* Champs de saisie */
@@ -304,4 +309,13 @@ export default {
     color: rgb(255, 254, 254);
     padding: 2px;
   }
+  .underline{
+    height: 4px;
+    width: 88px;
+    background-color: #e7340c;
+    border-radius: 8px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    margin-left: 30%;
+}
   </style>
