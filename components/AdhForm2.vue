@@ -9,21 +9,8 @@
         </h2>
       </div>
     </div>
-    <div class="social-icons">
-      <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">
-        <img src="/facebook-icon.png" alt="Facebook">
-      </a>
-      <a href="https://www.twitter.com" target="_blank" class="social-icon twitter">
-        <img src="/twitter-icon.png" alt="Twitter">
-      </a>
-    </div>
-    <div
-      class="form-zone"
-      style="border: 3px solid #e7340c;border-right: none;"
-    >
-      <div
-        class="big-circle"
-      >
+    <div class="form-zone" style="border: 3px solid #e7340c;border-right: none;">
+      <div class="big-circle">
         <img src="/icon.png" alt="Logo" class="circle-image">
       </div>
       <div class="form-container">
@@ -68,7 +55,23 @@
             S'inscrire
           </button>
         </form>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/1EWfGXYQTv/?mibextid=LQQJ4d" target="_blank" class="social-icon facebook">
+            <img src="/social-facebook.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/invites/contact/?igsh=1pwkttoqdzcuy&utm_content=kuod230" target="_blank" class="social-icon instagram">
+            <img src="/social-insta.png" alt="Twitter">
+          </a>
+          <a href="https://www.youtube.com" target="_blank" class="social-icon youtube">
+            <img src="/social-youtube.png" alt="Twitter">
+          </a>
+        </div>
       </div>
+    </div>
+    <div class="footer">
+      <h2 class="footer-text">
+        ABIDJAN COCODY-DJOROGOBITE <br> TEL: +225 27 22 203 561 <br>NOTRE DAME DE LA NATIVITE, CIEL SUR TERRE
+      </h2>
     </div>
   </div>
 </template>
@@ -119,14 +122,14 @@ export default {
     }
   }
 }
-
 </script>
 
   <style scoped>
   /* Container principal */
   .main-container {
     height: 100vh;
-    background-color: rgb(21, 21, 98);
+    background: url('/Recen.png') no-repeat center center;
+  background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -135,56 +138,35 @@ export default {
   }
 
   /* Zone de titre */
-  .title-zone {
-    height: 20%;
-    background-color: rgb(21, 21, 98);
-    color: white;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+.title-zone {
+  height: 25%;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  position: relative;
+}
+
+.title-circle {
+  border: 3px solid #e7340c;
+  border-radius: 35%;
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color:white /*rgba(255, 255, 255, 0.1);  Ajout d'un fond légèrement transparent pour mieux voir le cercle */
+}
+
   .titre {
     font-size: 12px;
-    color: white;
+    color: rgb(12, 12, 12);
     padding: 2px;
-  }
- .title-circle{
-  border: 3px solid #e7340c;
-    border-radius: 45%;
-    padding: 2px;
-
- }
-  /* Icônes de réseaux sociaux */
-  .social-icons {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    margin-bottom: 8px;
-    z-index: 10;
-  }
-  .social-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  .social-icon img {
-    width: 20px;
-    height: 20px;
-  }
-  .facebook {
-    background-color: #3b5998;
-  }
-  .twitter {
-    background-color: #1da1f2;
   }
 
   /* Cercle superposé */
@@ -212,7 +194,7 @@ export default {
 
   /* Zone du formulaire */
   .form-zone {
-    height: 70%;
+    height: 60%;
     width: 80%;
     border: 3px #e7340c;
     background-color: white;
@@ -286,5 +268,40 @@ export default {
   }
   .checkbox input {
     margin-right: 0.2rem;
+  }
+  /* Icônes de réseaux sociaux */
+.social-icons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.footer{
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+.footer-text {
+    font-size: 12px;
+    color: rgb(255, 254, 254);
+    padding: 2px;
   }
   </style>

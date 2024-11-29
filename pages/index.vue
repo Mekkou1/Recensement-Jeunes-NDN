@@ -1,5 +1,5 @@
 <template>
-  <AdhForm />
+  <AdhForm2 />
 </template>
 
 <script>

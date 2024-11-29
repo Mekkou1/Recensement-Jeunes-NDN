@@ -64,7 +64,9 @@ export default {
         }
       ]
     },
-
+    icon: {
+      source: 'static/icons/icon.png' // Définir l'icône principale
+    },
     manifest: {
       lang: 'fr',
       name: 'Adhésion NDN',
@@ -75,37 +77,37 @@ export default {
       display: 'standalone',
       icons: [
         {
-          src: '/icon-192x192.png',
+          src: '/icons/icon-192x192.png',
           sizes: '192x192',
           type: 'image/png'
         },
         {
-          src: '/icon-512x512.png',
+          src: '/icons/icon-512x512.png',
           sizes: '512x512',
           type: 'image/png'
         },
         {
-          src: '/icon-384x384.png',
+          src: '/icons/icon-384x384.png',
           sizes: '384x384',
           type: 'image/png'
         },
         {
-          src: '/icon-152x152.png',
+          src: '/icons/icon-152x152.png',
           sizes: '152x152',
           type: 'image/png'
         },
         {
-          src: '/icon-144x144.png',
+          src: '/icons/icon-144x144.png',
           sizes: '144x144',
           type: 'image/png'
         },
         {
-          src: '/icon-120x120.png',
+          src: '/icons/icon-120x120.png',
           sizes: '120x120',
           type: 'image/png'
         },
         {
-          src: '/icon-64x64.png',
+          src: '/icons/icon-64x64.png',
           sizes: '64x64',
           type: 'image/png'
         }
