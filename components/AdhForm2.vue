@@ -268,12 +268,26 @@ export default {
   }
 
   /* Checkbox */
-  .checkbox {
-    font-size: 0.7rem;
-  }
-  .checkbox input {
-    margin-right: 0.2rem;
-  }
+  /* Checkbox */
+.checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  margin: 10px 0; /* Ajustez l'espacement si nécessaire */
+}
+
+.checkbox input {
+  margin-right: 0.5rem;
+  width: 16px;
+  height: 16px; /* Taille de la case */
+  cursor: pointer;
+}
+
+.checkbox label {
+  margin: 0;
+  cursor: pointer; /* Rend le label cliquable */
+}
+
   /* Icônes de réseaux sociaux */
 .social-icons {
   width: 100%;
