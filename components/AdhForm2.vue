@@ -153,7 +153,7 @@ export default {
 }
 
 .title-circle {
-  border: 3px solid #e7340c;
+  border: 3px solid darkblue;
   border-radius: 35%;
   width: 300px;
   height: 100px;
@@ -268,7 +268,6 @@ export default {
   }
 
   /* Checkbox */
-  /* Checkbox */
 .checkbox {
   display: flex;
   align-items: center;
@@ -324,9 +323,9 @@ export default {
     padding: 2px;
   }
   .underline{
-    height: 4px;
+    height: 1px;
     width: 88px;
-    background-color: #e7340c;
+    background-color: rgb(12, 12, 12);
     border-radius: 8px;
     margin-bottom: 3px;
     margin-top: 3px;
